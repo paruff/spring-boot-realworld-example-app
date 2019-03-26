@@ -52,9 +52,9 @@ volumes: [
                         sh './gradlew sonarqube -Dsonar.projectKey=realworld'
                     }
                 
-                stage('Publish test results') {
-                    junit 'build/reports/tests/test/index.html'
-                } 
+                // stage('Publish test results') {
+                //     junit 'build/reports/tests/test/index.html'
+                // } 
                 
             }
         }
