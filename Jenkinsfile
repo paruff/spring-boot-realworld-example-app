@@ -17,21 +17,21 @@ volumes: [
     def shortGitCommit = "${gitCommit[0..10]}"
     def previousGitCommit = sh(script: "git rev-parse ${gitCommit}~", returnStdout: true)
         
-        stage('Get a Maven project') {
+        stage('Get a Gradle project') {
             checkout scm
             container('gradle') {
 
-                stage('Validate project') {
-                    sh 'mvn -B  validate'
+                stage('Build project') {
+                    sh 'gradle biuld'
                 }
                 
-                stage('Compile project') {
-                    sh 'mvn -B  compile'
-                }
+                // stage('Compile project') {
+                //     sh 'mvn -B  compile'
+                // }
                 
-                stage('Unit Test and coverage project') {
-                    sh 'mvn -B  test'
-                }
+                // stage('Unit Test and coverage project') {
+                //     sh 'mvn -B  test'
+                // }
                 
 // TODO
 //  sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target               
@@ -39,9 +39,9 @@ volumes: [
 //                    sh 'mvn -B -Djavax.net.ssl.trustStore=/path/to/cacerts dependency-check:check'
 //                }
             
-                stage 'Package and Code Analysis'
+                stage 'Code Analysis'
                     withSonarQubeEnv {
-                        sh "mvn package sonar:sonar"
+                        sh './gradlew --info sonarqube'
                     }
                 
                 stage('Publish test results') {
