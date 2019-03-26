@@ -1,7 +1,7 @@
 def label = "mypod-${UUID.randomUUID().toString()}"
-// def Registry = 
-// def Registry = 
-// def Registry = 
+// def Registry-service = dockerhub.com
+// def Registry-user = paruff
+// def Registry-repository = spring-conduit-api
 
 
 podTemplate(label: label, containers: [
@@ -45,7 +45,7 @@ volumes: [
 //                }
             
                 stage 'Code Analysis'
-                    withSonarQubeEnv {
+                    withSonarQubeEnv ("SonarQube"){
                         sh 'gradle --info sonarqube'
                     }
                 
