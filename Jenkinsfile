@@ -22,7 +22,7 @@ volumes: [
             container('gradle') {
 
                 stage('Build project') {
-                    sh 'gradle biuld'
+                    sh 'gradle build'
                 }
                 
                 // stage('Compile project') {
