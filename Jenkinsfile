@@ -1,4 +1,9 @@
 def label = "mypod-${UUID.randomUUID().toString()}"
+def Registry = 
+def Registry = 
+def Registry = 
+
+
 podTemplate(label: label, containers: [
     containerTemplate(name: 'maven', image: 'maven:3.6.0-jdk-8-alpine', ttyEnabled: true, command: 'cat'),
     containerTemplate(name: 'gradle', image: 'gradle:4.7.0-jdk8', command: 'cat', ttyEnabled: true),
@@ -41,7 +46,7 @@ volumes: [
             
                 stage 'Code Analysis'
                     withSonarQubeEnv {
-                        sh './gradlew --info sonarqube'
+                        sh 'gradle --info sonarqube'
                     }
                 
                 stage('Publish test results') {
