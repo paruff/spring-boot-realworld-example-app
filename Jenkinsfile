@@ -1,7 +1,7 @@
 def label = "mypod-${UUID.randomUUID().toString()}"
-def Registry = 
-def Registry = 
-def Registry = 
+// def Registry = 
+// def Registry = 
+// def Registry = 
 
 
 podTemplate(label: label, containers: [
