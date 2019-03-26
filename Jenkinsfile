@@ -46,7 +46,7 @@ volumes: [
             
                 stage 'Code Analysis'
                     withSonarQubeEnv ("SonarQube"){
-                        sh 'gradle --info sonarqube'
+                       // sh 'gradle --info sonarqube'
                         sh './gradlew sonarqube -Dsonar.projectKey=realworld'
                     }
                 
