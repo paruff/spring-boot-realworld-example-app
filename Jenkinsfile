@@ -26,17 +26,17 @@ volumes: [
             checkout scm
             container('gradle') {
 
+                stage('Check project') {
+                    sh 'gradle check'
+                }
+                
+                stage('Test project') {
+                    sh 'gradle test'
+                }
+                
                 stage('Build project') {
                     sh 'gradle build'
                 }
-                
-                // stage('Compile project') {
-                //     sh 'mvn -B  compile'
-                // }
-                
-                // stage('Unit Test and coverage project') {
-                //     sh 'mvn -B  test'
-                // }
                 
 // TODO
 //  sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target               
