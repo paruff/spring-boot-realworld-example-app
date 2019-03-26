@@ -1,6 +1,6 @@
 def label = "mypod-${UUID.randomUUID().toString()}"
 // def Registry-service = dockerhub.com
-// def Registry-user = paruff
+// def Registry-user = paruff see ${DOCKER_HUB_USER}
  def Registry-repository = spring-conduit-api
 
 
@@ -51,12 +51,12 @@ volumes: [
                     }
                 
                 stage('Publish test results') {
-                    junit 'target/surefire-reports/*.xml'
+                    junit 'build/reports/tests/test/index.html'
                 } 
                 
             }
         }
-        stage('Create Docker images') {
+    stage('Create Docker images') {
       container('docker') {
         withCredentials([[$class: 'UsernamePasswordMultiBinding',
           credentialsId: 'dockerhub',
