@@ -5,13 +5,13 @@ buildscript {
 	}
 	repositories {
 		mavenCentral()
-		maven {
-            url "https://plugins.gradle.org/m2/"
-        }
+		maven { url "https://plugins.gradle.org/m2/" }
+		maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
 		  classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.6" 
+		  classpath "net.saliman:gradle-cobertura-plugin:2.6.0"
 	}
 }
 
@@ -21,6 +21,7 @@ apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'org.sonarqube'
+apply plugin: 'net.saliman.cobertura'
 
 dependencyManagement {
     imports {
