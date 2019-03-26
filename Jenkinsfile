@@ -1,7 +1,7 @@
 def label = "mypod-${UUID.randomUUID().toString()}"
 podTemplate(label: label, containers: [
     containerTemplate(name: 'maven', image: 'maven:3.6.0-jdk-8-alpine', ttyEnabled: true, command: 'cat'),
-    containerTemplate(name: 'gradle', image: 'gradle:5.2.1-jdk8', command: 'cat', ttyEnabled: true),
+    containerTemplate(name: 'gradle', image: 'gradle:4.7.0-jdk8', command: 'cat', ttyEnabled: true),
     containerTemplate(name: 'docker', image: 'docker', command: 'cat', ttyEnabled: true)
   ],
 volumes: [
@@ -19,7 +19,7 @@ volumes: [
         
         stage('Get a Maven project') {
             checkout scm
-            container('maven') {
+            container('gradle') {
 
                 stage('Validate project') {
                     sh 'mvn -B  validate'
