@@ -1,7 +1,7 @@
 def label = "mypod-${UUID.randomUUID().toString()}"
 // def Registry-service = dockerhub.com
 // def Registry-user = paruff see ${DOCKER_HUB_USER}
- def Registry-repository = spring-conduit-api
+ def RegistryRepository = spring-conduit-api
 
 
 podTemplate(label: label, containers: [
@@ -64,8 +64,8 @@ volumes: [
           passwordVariable: 'DOCKER_HUB_PASSWORD']]) {
           sh """
             docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASSWORD}
-            docker build -t ${DOCKER_HUB_USER}/${Registry-repository}:${gitCommit} .
-            docker push ${DOCKER_HUB_USER}/${Registry-repository}:${gitCommit}
+            docker build -t ${DOCKER_HUB_USER}/${RegistryRepository}:${gitCommit} .
+            docker push ${DOCKER_HUB_USER}/${RegistryRepository}:${gitCommit}
             """
         }
       }
