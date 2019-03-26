@@ -1,7 +1,7 @@
 def label = "mypod-${UUID.randomUUID().toString()}"
 // def Registry-service = dockerhub.com
 // def Registry-user = paruff see ${DOCKER_HUB_USER}
- def RegistryRepository = spring-conduit-api
+ 
 
 
 podTemplate(label: label, containers: [
@@ -16,6 +16,8 @@ volumes: [
 ]) {
 
     node(label) {
+
+        def RegistryRepository = spring-conduit-api
         def myRepo = checkout scm
     def gitCommit = myRepo.GIT_COMMIT
     def gitBranch = myRepo.GIT_BRANCH
