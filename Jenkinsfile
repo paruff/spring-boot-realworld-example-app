@@ -17,7 +17,7 @@ volumes: [
 
     node(label) {
 
-        def RegistryRepository = spring-conduit-api
+        def RegistryRepository = "spring-conduit-api"
         def myRepo = checkout scm
     def gitCommit = myRepo.GIT_COMMIT
     def gitBranch = myRepo.GIT_BRANCH
