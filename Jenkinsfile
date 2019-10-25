@@ -64,13 +64,13 @@ volumes: [
                         sh './gradlew sonarqube -Dsonar.projectKey=realworld'
                     }
                 
-                 stage('Publish test results') {
-                     junit 'build/reports/tests/test/index.html'
-                 } 
+           //      stage('Publish test results') {
+           //          junit 'build/reports/tests/test/index.html'
+           //      } 
                 
             }
         }
-    stage('Create Docker images') {
+    stage('Package and publish Docker images') {
       container('docker') {
         withCredentials([[$class: 'UsernamePasswordMultiBinding',
           credentialsId: 'dockerhub',
