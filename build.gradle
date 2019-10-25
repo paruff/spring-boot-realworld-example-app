@@ -25,7 +25,7 @@ apply plugin: 'io.spring.dependency-management'
 apply plugin: 'org.sonarqube'
 apply plugin: 'net.saliman.cobertura'
 apply plugin: 'org.owasp.dependencycheck'
-apply plugins: 'jacoco'
+apply plugin: 'jacoco'
 
 dependencyManagement {
     imports {
