@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello
+spec:
+  selector:
+    matchLabels:
+      app: hello
+      tier: backend
+      track: stable
+  replicas: 7
+  template:
+    metadata:
+      labels:
+        app: hello
+        tier: backend
+        track: stable
+    spec:
+      containers:
+        - name: hello
+          image: "paruff/spring-conduit-api:latest"
+          ports:
+            - name: http
+              containerPort: 80
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: hello
+spec:
+  selector:
+    app: hello
+    tier: backend
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: http
