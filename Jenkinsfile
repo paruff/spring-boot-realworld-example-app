@@ -54,24 +54,17 @@ volumes: [
                 stage('Build') {
                     sh 'gradle build'
                 }
-                
-// TODO
-//  sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target               
-//                stage('Scan components Maven project') {
-//                    sh 'mvn -B -Djavax.net.ssl.trustStore=/path/to/cacerts dependency-check:check'
-//                }
-            
+                            
                 stage 'Code Analysis'
                     withSonarQubeEnv ("sonarqube"){
-                       // sh 'gradle --info sonarqube'
-                        sh './gradlew sonarqube -Dsonar.projectKey=realworld'
+                        sh './gradlew sonarqube'
                     }
                 
            //      stage('Publish test results') {
            //          junit 'build/reports/tests/test/index.html'
            //      } 
 		    
-		                    stage('Component Security Scan') {
+		stage('Component Security Scan') {
                     sh './gradlew dependencyCheckAnalyze'
                 }
 		    
