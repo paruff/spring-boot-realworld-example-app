@@ -12,8 +12,12 @@ buildscript {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
 		  classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.6" 
 		  classpath "net.saliman:gradle-cobertura-plugin:2.6.0"
+		  classpath 'org.owasp:dependency-check-gradle:5.2.2'
+
 	}
 }
+
+
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
@@ -22,6 +26,8 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'org.sonarqube'
 apply plugin: 'net.saliman.cobertura'
+apply plugin: 'org.owasp.dependencycheck'
+
 
 dependencyManagement {
     imports {
