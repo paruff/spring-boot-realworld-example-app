@@ -39,7 +39,7 @@ volumes: [
      def AppVersion = "0.0.2"
 
         
-        stage('Get a Gradle project') {
+        stage('Gradle project') {
             checkout scm
             container('gradle') {
 
@@ -47,11 +47,11 @@ volumes: [
                     sh 'gradle check'
                 }
                 
-                stage('Test project') {
+                stage('Unit Test') {
                     sh 'gradle test'
                 }
                 
-                stage('Build project') {
+                stage('Build') {
                     sh 'gradle build'
                 }
                 
@@ -70,7 +70,11 @@ volumes: [
            //      stage('Publish test results') {
            //          junit 'build/reports/tests/test/index.html'
            //      } 
-                
+		    
+		                    stage('Component Security Scan') {
+                    sh './gradlew dependencyCheckAnalyze'
+                }
+		    
             }
         }
     stage('Package and publish Docker images') {
