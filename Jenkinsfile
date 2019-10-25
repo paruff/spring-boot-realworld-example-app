@@ -16,13 +16,25 @@ volumes: [
 ]) {
 
     node(label) {
-
-        def RegistryRepository = "spring-conduit-api"
+        def RegistryRepository = "spring-conduit-api"     
         def myRepo = checkout scm
-    def gitCommit = myRepo.GIT_COMMIT
-    def gitBranch = myRepo.GIT_BRANCH
-    def shortGitCommit = "${gitCommit[0..10]}"
-    def previousGitCommit = sh(script: "git rev-parse ${gitCommit}~", returnStdout: true)
+        def gitCommit = myRepo.GIT_COMMIT
+        def gitBranch = myRepo.GIT_BRANCH
+        def branchName = sh(script: "echo $gitBranch | cut -c8-", returnStdout: true)
+        def shortGitCommit = "${gitCommit[0..10]}"
+        def previousGitCommit = sh(script: "git rev-parse ${gitCommit}~", returnStdout: true)
+        def gitCommitCount = sh(script: "git rev-list --all --count", returnStdout: true)
+
+        // Docker registry 
+        def regURL = "registry.gitlab.com/unisys-fed/appserv-demos/real-world-app"
+        def regNamespace = "registry.gitlab.com/unisys-fed/appserv-demos/real-world-app"
+
+     
+     // Gradle version
+     def artifactID = "spring-boot-realworld-example-app"
+	    def artifactGroup = "org.springframework.samples"
+     def AppVersion = "0.0.2"
+
         
         stage('Get a Gradle project') {
             checkout scm
