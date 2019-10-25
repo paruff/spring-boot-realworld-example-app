@@ -91,7 +91,7 @@ volumes: [
 
 stage('deploy 2 k8s') {
       container('kubectl') {
-        sh "kubectl apply -f k8s-svc.yaml"
+        sh "kubectl apply -n default -f k8s-svc.yaml"
       }
     }
 
