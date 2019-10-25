@@ -30,11 +30,11 @@ volumes: [
 
         // Docker registry 
         def regURL = "registry.gitlab.com/unisys-fed/appserv-demos/real-world-app"
-        def regNamespace = "registry.gitlab.com/unisys-fed/appserv-demos/real-world-app"
+        def regNamespace = "paruff"
 
      
      // Gradle version
-     def artifactID = "spring-boot-realworld-example-app"
+     def artifactID = "spring-conduit-api"
 	    def artifactGroup = "org.springframework.samples"
      def AppVersion = "0.0.2"
 
@@ -81,8 +81,12 @@ volumes: [
           passwordVariable: 'DOCKER_HUB_PASSWORD']]) {
           sh """
             docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASSWORD}
-            docker build -t ${DOCKER_HUB_USER}/${RegistryRepository}:${gitCommit} .
-            docker push ${DOCKER_HUB_USER}/${RegistryRepository}:${gitCommit}
+ 	    docker build -t ${regNamespace}/${artifactID} .
+	    docker tag ${regNamespace}/${artifactID} ${regNamespace}/${artifactID}:${AppVersion}.${shortGitCommit}
+            docker tag ${regNamespace}/${artifactID} ${regNamespace}/${artifactID}:${AppVersion}.${gitCommitCount}
+            docker tag ${regNamespace}/${artifactID} ${regNamespace}/${artifactID}:${AppVersion}.${BUILD_NUMBER}
+
+	    docker push ${regNamespace}/${artifactID}
             """
         }
       }
