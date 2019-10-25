@@ -1,24 +1,15 @@
-FROM gradle:4.8.0-jdk8-alpine
-
-WORKDIR /home/gradle/project
-
-EXPOSE 8080
-
-USER root
-
-RUN apk update
-
-ENV GRADLE_USER_HOME /home/gradle/project
-
-COPY . /home/gradle/project
-
-RUN gradle build
-
+#FROM gradle:4.8.0-jdk8-alpine
+#WORKDIR /home/gradle/project
+#USER root
+#RUN apk update
+#ENV GRADLE_USER_HOME /home/gradle/project
+# COPY . /home/gradle/project
+#RUN gradle build
 
 FROM java:jre-alpine
 
-WORKDIR /home/gradle/project
+# WORKDIR /home/gradle/project
 
-COPY --from=0 /home/gradle/project/build/libs/project-0.0.1-SNAPSHOT.jar .
+COPY  springboot.jar .
 
-ENTRYPOINT java -jar project-0.0.1-SNAPSHOT.jar
+ENTRYPOINT java -jar springboot.jar
