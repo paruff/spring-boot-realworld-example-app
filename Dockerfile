@@ -5,11 +5,11 @@
 #ENV GRADLE_USER_HOME /home/gradle/project
 # COPY . /home/gradle/project
 #RUN gradle build
-
-FROM java:jre-alpine
-
+FROM openjdk:8-jre-alpine
+USER root
+# RUN apk update
 # WORKDIR /home/gradle/project
-
-COPY  springboot.jar .
-
-ENTRYPOINT java -jar springboot.jar
+# COPY --from=0 /home/gradle/project/build/libs/project-0.0.2.jar /app.jar
+COPY ./build/libs/* ./app.jar
+EXPOSE 8080
+CMD ["java","-jar","app.jar"]
